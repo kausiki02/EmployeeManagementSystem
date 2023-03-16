@@ -7,7 +7,7 @@
     }
     public class Employee
     {
-        public EType EmployeeType { get; set; }
+        public string EmployeeType { get; set; }
        
         public int EmployeeID { get; set; }
 

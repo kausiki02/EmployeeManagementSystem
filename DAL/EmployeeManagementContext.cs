@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagement.DAL
 {
-    public class EmployeeManagementCatalogContext : DbContext
+    public class EmployeeManagementContext : DbContext
     {
-        public EmployeeManagementCatalogContext(DbContextOptions<EmployeeManagementCatalogContext> options) : base(options)
+        public EmployeeManagementContext(DbContextOptions<EmployeeManagementContext> options) : base(options)
         {
 
         }

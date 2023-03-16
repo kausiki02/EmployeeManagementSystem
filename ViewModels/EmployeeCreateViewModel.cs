@@ -7,7 +7,7 @@ namespace EmployeeManagement.ViewModels
 
         public string EmployeeName { get; set; }
 
-        public EType EmployeeType { get; set; }
+        public string EmployeeType { get; set; }
 
 
         public string Gender { get; set; }

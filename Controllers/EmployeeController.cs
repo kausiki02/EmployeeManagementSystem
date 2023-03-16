@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using EmployeeManagement.Services;
 using EmployeeManagement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 namespace EmployeeManagement.Controllers
 {
@@ -21,7 +22,7 @@ namespace EmployeeManagement.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EmployeeViewModel>>> GetAllEmployeeAsync()
         {
-            return Ok(await _service.GetAllEmployeeAsync());
+            return Ok(await _service.GetAllEmployeesAsync());
         }
 
         [HttpGet("{id:int}")]
@@ -43,10 +44,10 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult> DeleteAsync(int id)
+        public async Task<ActionResult<string>> DeleteAsync(int id)
         {
             await _service.DeleteAsync(id);
-            return NoContent();
+            return "Successfullly Deleted";
         }
     }
 }

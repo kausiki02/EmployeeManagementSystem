@@ -9,8 +9,20 @@ namespace EmployeeManagement
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-            builder.Services.AddDbContext<EmployeeManagementCatalogContext>(options =>
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("http://localhost:4200");
+                                      policy.AllowAnyHeader();
+                                      policy.AllowAnyMethod();
+                                  });
+            });
+
+            builder.Services.AddDbContext<EmployeeManagementContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Development"));
             });
@@ -19,6 +31,7 @@ namespace EmployeeManagement
 
             var app = builder.Build();
 
+            app.UseCors(MyAllowSpecificOrigins);
             app.MapControllers();
 
             app.Run();

@@ -4,18 +4,20 @@ using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
 using System;
 using EmployeeManagement.Services;
+using System.Data;
+using System.Reflection;
 
 namespace EmployeeManagement.Services
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly EmployeeManagementCatalogContext _context;
+        private readonly EmployeeManagementContext _context;
 
-        public EmployeeService(EmployeeManagementCatalogContext context) 
+        public EmployeeService(EmployeeManagementContext context) 
         {
             _context = context;
         }
-        public async Task<IEnumerable<EmployeeViewModel>> GetAllEmployeeAsync()
+        public async Task<IEnumerable<EmployeeViewModel>> GetAllEmployeesAsync()
         {
             return await _context.Employees
                 .Select(p => new EmployeeViewModel
@@ -26,7 +28,7 @@ namespace EmployeeManagement.Services
                     Gender = p.Gender,
                     Role = p.Role,
                     Skills = p.Skills,
-                    Division = p.Division,
+                    Division = p.Division
                 })
                 .ToListAsync();
         }
@@ -54,14 +56,13 @@ namespace EmployeeManagement.Services
                     Gender = p.Gender,
                     Role = p.Role,
                     Skills = p.Skills,
-                    Division = p.Division,
+                    Division = p.Division
                 };
 
                 return ans;
             }
 
-        public async Task<EmployeeViewModel> UpdateEmployeeAsync(int id, EmployeeUpdateViewModel employee
-            )
+        public async Task<EmployeeViewModel> UpdateEmployeeAsync(int id, EmployeeUpdateViewModel employee)
         {
             var p = await FromId(id);
 
@@ -76,7 +77,6 @@ namespace EmployeeManagement.Services
 
             return ToViewModel(p);
         }
-
         public async Task DeleteAsync(int id)
         {
             var p = await FromId(id);
@@ -94,7 +94,7 @@ namespace EmployeeManagement.Services
                 Gender = p.Gender,
                 Role = p.Role,
                 Skills = p.Skills,
-                Division = p.Division,
+                Division = p.Division
             };
         }
         private EmployeeViewModel ToViewModel(Employee p)
@@ -107,7 +107,7 @@ namespace EmployeeManagement.Services
                 Gender = p.Gender,
                 Role = p.Role,
                 Skills = p.Skills,
-                Division = p.Division,
+                Division = p.Division
 
             };
         }
@@ -116,6 +116,5 @@ namespace EmployeeManagement.Services
             return await _context.Employees.FirstAsync(p => p.EmployeeID == id);
         }
 
-       
     }
 }

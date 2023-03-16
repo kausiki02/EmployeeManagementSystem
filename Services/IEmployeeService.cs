@@ -5,7 +5,7 @@ namespace EmployeeManagement.Services
 {
     public interface IEmployeeService
     {
-        Task<IEnumerable<EmployeeViewModel>> GetAllEmployeeAsync();
+        Task<IEnumerable<EmployeeViewModel>> GetAllEmployeesAsync();
         Task<EmployeeViewModel> GetEmployeeByIdAsync(int id);
         Task<EmployeeViewModel> AddEmployeeAsync(EmployeeCreateViewModel employee);
 
